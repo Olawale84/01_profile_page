@@ -7,3 +7,59 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+.hero {
+  height: fit-content;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: black;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  color: white;
+}
+
+.hero > div {
+  display: grid;
+  width: 100%;
+  gap: 1rem;
+  place-items: center;
+}
+
+.hero img {
+  width: 23rem;
+  height: 23rem;
+  display: block;
+  background-size: cover;
+  border-radius: 50%;
+  /* align-self: center; */
+}
+span {
+  color: red;
+}
+.content {
+  /* align-self: start; */
+  justify-self: start;
+  height: 100%;
+}
+h1 {
+  color: white;
+  font-size: 50px;
+  margin: 20;
+}
+h2 {
+  color: blue;
+  font-size: 30px;
+}
+h3 {
+  color: white;
+  font-size: 20px;
+}
+h4 {
+  color: #fcfc;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+h5 {
+  color: purple;
+  font-size: 20px;
+}
