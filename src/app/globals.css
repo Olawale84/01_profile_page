@@ -6,6 +6,8 @@
 }
 
 @theme inline {
+  --font-helvetica: var(--font-Helvetica);
+  --font-inter: var(--font-inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

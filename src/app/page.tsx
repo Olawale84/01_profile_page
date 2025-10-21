@@ -1,103 +1,326 @@
+import ContactButton from "@/components/contact-button";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// Type definitions for component props
+interface NavLinkProps {
+  text: string;
+}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+interface SocialLinkProps {
+  text: string;
+}
+
+interface SectionHeaderProps {
+  text: string;
+  bgColor?: string;
+  textColor?: string;
+}
+
+interface SkillItemProps {
+  text: string;
+}
+
+interface WorkItemProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  title: string;
+  bgColor: string;
+  linkText?: string;
+  hasLink?: boolean;
+  position?: "center" | "bottom";
+}
+
+interface FormInputProps {
+  label: string;
+  placeholder: string;
+}
+
+// Reusable Navigation Link Component
+const NavLink: React.FC<NavLinkProps> = ({ text }) => (
+  <div className="text-neutral-800 text-lg font-medium font-helvetica tracking-tight">
+    {text}
+  </div>
+);
+
+// Reusable Social Link Component (for rotated social links)
+const SocialLink: React.FC<SocialLinkProps> = ({ text }) => (
+  <div className="text-neutral-800 text-lg font-normal font-helvetica rotate-90 origin-bottom-right">
+    {text}
+  </div>
+);
+
+// Reusable Section Header Component
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  text,
+  bgColor = "bg-white",
+  textColor = "text-neutral-800",
+}) => (
+  <div className={`p-5 ${bgColor} rounded-[100px] inline-flex justify-center items-center gap-2.5`}>
+    <div className={`text-center ${textColor} text-lg font-medium font-helvetica`}>{text}</div>
+  </div>
+);
+
+// Reusable Skill Item Component
+const SkillItem: React.FC<SkillItemProps> = ({ text }) => (
+  <div className="px-7 py-5 rounded-[100px] outline-[5px] outline-neutral-800 flex justify-center items-center gap-2.5">
+    <div className="text-neutral-800 text-5xl font-medium font-helvetica">{text}</div>
+  </div>
+);
+
+// Reusable Work Item Component
+const WorkItem: React.FC<WorkItemProps> = ({
+  src,
+  alt,
+  width,
+  height,
+  title,
+  bgColor,
+  linkText,
+  hasLink = true,
+  position = "center",
+}) => (
+  <div className="w-[613px] inline-flex flex-col justify-start items-end gap-2.5">
+    <div
+      className={`self-stretch h-96 relative ${bgColor} shadow-[0px_4px_4px_0px_rgba(0,0,0,0.10)] ${position === "center" ? "grid place-items-center" : "overflow-hidden"
+        }`}
+    >
+      <Image
+        className={
+          position === "center"
+            ? "object-contain"
+            : "absolute bottom-0 left-1/2 -translate-x-1/2 max-w-full max-h-full object-contain"
+        }
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+      />
+    </div>
+    <div className="self-stretch inline-flex justify-between items-center">
+      <div className="flex justify-start items-center gap-5">
+        <div className="w-5 h-5 bg-orange-500 rounded-full" />
+        <div className="text-center text-neutral-800 text-lg font-medium font-helvetica">{title}</div>
+      </div>
+      {hasLink && linkText && (
+        <>
+          <Image src="/long-arrow.svg" width={200} height={17} alt="long arrow" />
+          <div className="flex justify-start items-center gap-3.5">
+            <div className="w-6 h-6 relative overflow-hidden">
+              <Image src="/eye.svg" width={24} height={24} alt="eye" />
+            </div>
+            <div className="text-center text-black text-lg font-medium font-helvetica">{linkText}</div>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+);
+
+// Reusable Form Input Component
+const FormInput: React.FC<FormInputProps> = ({ label, placeholder }) => (
+  <div className="self-stretch flex flex-col justify-start items-start gap-[ inteligent 5px]">
+    <div className="text-neutral-800 text-sm font-medium font-helvetica">{label}</div>
+    <div className="self-stretch px-2.5 py-3.5 border-b border-black inline-flex justify-start items-center gap-2.5">
+      <div className="text-neutral-500 text-sm font-medium font-helvetica">{placeholder}</div>
+    </div>
+  </div>
+);
+
+// Main Home Component
+const Home: React.FC = () => {
+  return (
+    <div className="w-full h-fit pt-12 bg-white flex flex-col items-center gap-36">
+      {/* HEADER */}
+      <div className="px-20 w-full flex flex-col items-start gap-12">
+        {/* NAV */}
+        <div className="w-full flex justify-between items-center">
+          <NavLink text="About" />
+          <NavLink text="Works" />
+          <NavLink text="Contact" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="w-full flex justify-between">
+          <Image src="./indicator.svg" alt="indicator" width={53} height={281} className="self-end pb-10" />
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-7">
+              <div className="text-center">
+                <span className="text-neutral-800 text-7xl font-extralight font-helvetica">I’m a </span>
+                <span className="text-neutral-800 text-7xl font-bold font-helvetica">Web Designer </span>
+              </div>
+              <div className="flex items-center gap-7">
+                <div className="text-neutral-800 text-lg font-medium font-helvetica">Based in Nigeria</div>
+                <div className="w-32 h-0 outline-1 outline-offset-[-0.50px] outline-orange-500"></div>
+                <div className="text-neutral-800 text-lg font-medium font-helvetica">I Work Remotely</div>
+              </div>
+              <ContactButton />
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <Image src="/wale.jpg" width={292} height={328} alt="ME" />
+              <div>
+                <span className="text-black text-5xl font-medium font-helvetica">Olawale </span>
+                <span className="text-black text-5xl font-thin font-helvetica">Onasanya</span>
+              </div>
+            </div>
+          </div>
+          <div className="w-fit flex-col py-20 inline-flex justify-between items-center">
+            <SocialLink text="Twitter" />
+            <SocialLink text="LinkedIn" />
+            <SocialLink text="Behance" />
+          </div>
+        </div>
+      </div>
+      {/* END OF HEADER */}
+
+      {/* ABOUT */}
+      <div className="self-stretch h-full px-20 pt-[100px] pb-[120px] flex flex-col gap-[100px] relative bg-neutral-800">
+        <Image src="/star.svg" width={667} height={333.5} alt="star" className="absolute bottom-0" />
+        <div className="inline-flex flex-col justify-start items-center gap-12">
+          <SectionHeader text="My Approach" />
+          <div className="self-stretch">
+            <span className="text-white pl-20 text-7xl font-medium font-helvetica">
+              Building a business goes beyond structure —
+            </span>
+            <span className="text-orange-500 text-7xl font-medium font-helvetica">
+              it’s about the story that defines it. I help bring that story to life through visual design
+            </span>
+            <span className="text-white text-7xl font-medium font-helvetica">
+              that connects, inspires, and drives growth.
+            </span>
+          </div>
+        </div>
+        <div className="inline-flex flex-col justify-start items-end gap-12">
+          <div className="max-w-[533px] flex flex-col gap-[50px]">
+            <h3 className="w-full text-white text-lg font-normal font-helvetica leading-relaxed">
+              I’m a web designer who creates clean, strategic, and user-focused websites that turn ideas into impactful digital experiences.
+            </h3>
+            <ContactButton />
+          </div>
+        </div>
+      </div>
+      {/* END OF ABOUT */}
+
+      {/* SKILLS */}
+      <div className="self-stretch py-[150px] inline-flex flex-col justify-start items-center gap-12">
+        <SectionHeader text="Capabilities" bgColor="bg-neutral-800" textColor="text-white" />
+        <div className="self-stretch inline-flex justify-center items-start gap-12 flex-wrap content-start">
+          {["Web Design", "Web Redesign", "Prototyping", "Responsive Design", "UI/UX Design"].map((skill) => (
+            <SkillItem key={skill} text={skill} />
+          ))}
+        </div>
+      </div>
+      {/* END OF SKILLS */}
+
+      {/* WORKS */}
+      <div className="pb-[150px] self-stretch inline-flex justify-center items-start gap-14 flex-wrap content-start">
+        <WorkItem
+          src="/seo.png"
+          alt="seo"
+          width={513}
+          height={346}
+          title="Landing Page"
+          bgColor="bg-slate-900"
+          linkText="Behance"
+          position="bottom"
+        />
+        <WorkItem
+          src="/festivo.png"
+          alt="festivo"
+          width={513}
+          height={241}
+          title="Hero Section"
+          bgColor="bg-fuchsia-900"
+          hasLink={false}
+        />
+        <WorkItem
+          src="/humtran.png"
+          alt="humtran"
+          width={513}
+          height={346}
+          title="Landing Page"
+          bgColor="bg-yellow-950"
+          linkText="Behance"
+          position="bottom"
+        />
+        <WorkItem
+          src="/nike.png"
+          alt="nike"
+          width={513}
+          height={330}
+          title="Prototype"
+          bgColor="bg-rose-900"
+          linkText="Figma Prototyping"
+        />
+      </div>
+      {/* END OF WORKS */}
+
+      {/* FORM */}
+      <div className="w-[1280px] px-24 py-12 bg-neutral-800 inline-flex flex-col justify-start items-center gap-12 overflow-hidden">
+        <SectionHeader text="Contact Me" />
+        <div className="self-stretch inline-flex justify-start items-start gap-44">
+          <div className="w-[573px] text-white text-5xl font-medium font-helvetica">
+            Let’s create something that speaks — not just looks good.
+          </div>
+          <div className="w-80 inline-flex flex-col justify-start items-start gap-3.5">
+            <div className="self-stretch px-3.5 py-5 bg-neutral-200 shadow-[0px_4px_20px_0px_rgba(255,255,255,0.10)] flex flex-col justify-start items-start gap-7 overflow-hidden">
+              <FormInput label="Name" placeholder="Your Name" />
+              <FormInput label="Email" placeholder="Your Email" />
+              <div className="self-stretch flex flex-col justify-start items-start gap-[5px]">
+                <div className="text-neutral-800 text-sm font-medium font-helvetica">Message</div>
+                <div className="self-stretch h-24 p-2.5 border-b border-black inline-flex justify-start items-start gap-2.5">
+                  <div className="text-neutral-500 text-sm font-medium font-helvetica">Add a Message</div>
+                </div>
+              </div>
+              <div className="self-stretch px-2.5 py-3.5 bg-orange-500 rounded-[100px] inline-flex justify-center items-center gap-2.5">
+                <div className="text-white text-base font-medium font-helvetica">Send Message</div>
+              </div>
+            </div>
+            <div className="self-stretch text-white text-sm font-medium font-helvetica">
+              Leave a message I will get back to you soon
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* END OF FORM */}
+
+      {/* FOOTER */}
+      <div className="w-full pt-24 pb-7 bg-neutral-800 inline-flex flex-col justify-start items-center gap-12 overflow-hidden">
+        <div className="w-[1240px] inline-flex justify-between items-center">
+          <div className="w-96 inline-flex flex-col justify-start items-start gap-20">
+            <div className="self-stretch text-white text-2xl font-medium font-helvetica">
+              Designing digital experiences that speak, connect, and convert.
+            </div>
+            <div className="w-60 flex flex-col justify-start items-start gap-3.5">
+              <div className="self-stretch text-neutral-200 text-base font-medium font-helvetica">Email</div>
+              <div className="self-stretch text-white text-base font-medium font-helvetica">olawalewebdesigner@gmail.com</div>
+            </div>
+          </div>
+          <div className="w-28 inline-flex flex-col justify-start items-center gap-10">
+            <div className="self-stretch text-white text-xl font-medium font-helvetica">Quick Links</div>
+            {["Home", "About", "Contact"].map((link) => (
+              <div key={link} className="self-stretch text-white text-base font-medium font-helvetica">
+                {link}
+              </div>
+            ))}
+          </div>
+          <div className="w-32 inline-flex flex-col justify-center items-start gap-10">
+            <div className="self-stretch text-white text-xl font-medium font-helvetica">Social Link</div>
+            {["Twitter", "LinkedIn", "Whatsapp"].map((link) => (
+              <div key={link} className="self-stretch text-white text-base font-medium font-helvetica">
+                {link}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="self-stretch h-0 outline outline-offset-[-0.50px] outline-white"></div>
+        <div className="self-stretch text-center">
+          <span className="text-white text-sm font-medium font-helvetica">© 2025 Olawale. All Rights Reserved | Developed by </span>
+          <span className="text-orange-500 text-sm font-medium font-helvetica underline">Jolextom</span>
+        </div>
+      </div>
+      {/* END OF FOOTER */}
     </div>
   );
-}
+};
+
+export default Home;
