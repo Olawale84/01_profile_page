@@ -8,9 +8,9 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-    { text: "Twitter", href: "https://twitter.com" },
-    { text: "LinkedIn", href: "https://linkedin.com" },
-    { text: "Whatsapp", href: "https://wa.me" },
+    { text: "Twitter", href: "https://x.com/olawalewebdsgn" },
+    { text: "LinkedIn", href: "https://www.linkedin.com/in/olawaleonasanya-webdesigner/" },
+    { text: "Behance", href: "https://www.behance.net/Olawale-Onasanya" },
 ];
 
 const FooterSection: React.FC = () => {
@@ -23,7 +23,7 @@ const FooterSection: React.FC = () => {
                     </div>
                     <div className="w-60 flex flex-col justify-start items-start gap-3.5">
                         <div className="self-stretch text-neutral-200 text-base font-medium font-helvetica">Email</div>
-                        <div className="self-stretch text-white text-base font-medium font-helvetica">olawalewebdesigner@gmail.com</div>
+                        <div className="self-stretch text-white text-base font-medium font-helvetica">olawaleonasanya5@gmail.com</div>
                     </div>
                 </div>
 

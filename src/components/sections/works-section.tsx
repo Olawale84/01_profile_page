@@ -9,17 +9,18 @@ const WorksSection: React.FC = () => {
         >
             <WorkItem
                 src="/seo.png"
-                alt="seo"
+                alt="SEO landing page design by Olawale Onasanya"
                 width={513}
                 height={346}
                 title="Landing Page"
                 bgColor="bg-slate-900"
                 linkText="Behance"
+                linkHref="https://www.behance.net/Olawale-Onasanya"
                 position="bottom"
             />
             <WorkItem
                 src="/festivo.png"
-                alt="festivo"
+                alt="Festivo hero section design"
                 width={513}
                 height={241}
                 title="Hero Section"
@@ -28,17 +29,18 @@ const WorksSection: React.FC = () => {
             />
             <WorkItem
                 src="/humtran.png"
-                alt="humtran"
+                alt="Humtran landing page design by Olawale Onasanya"
                 width={513}
                 height={346}
                 title="Landing Page"
                 bgColor="bg-yellow-950"
                 linkText="Behance"
+                linkHref="https://www.behance.net/Olawale-Onasanya"
                 position="bottom"
             />
             <WorkItem
                 src="/nike.png"
-                alt="nike"
+                alt="Nike prototype design"
                 width={513}
                 height={330}
                 title="Prototype"

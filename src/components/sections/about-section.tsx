@@ -9,7 +9,7 @@ const AboutSection: React.FC = () => {
             id="about"
             className="self-stretch h-full px-6 sm:px-10 lg:px-20 pt-16 sm:pt-20 lg:pt-[100px] pb-20 sm:pb-24 lg:pb-[120px] flex flex-col gap-14 sm:gap-20 lg:gap-[100px] relative bg-neutral-800 overflow-hidden"
         >
-            <Image src="/star.svg" width={667} height={333.5} alt="star" className="absolute bottom-0 left-0 w-[75%] lg:w-auto h-auto" />
+            <Image src="/star.svg" width={667} height={333.5} alt="" className="absolute bottom-0 left-0 w-[75%] lg:w-auto h-auto" aria-hidden="true" />
             <div className="inline-flex flex-col justify-start items-center gap-8 lg:gap-12 z-10">
                 <SectionHeader text="My Approach" />
                 <div className="self-stretch text-center sm:text-left">

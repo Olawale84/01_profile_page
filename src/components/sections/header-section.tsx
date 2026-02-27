@@ -15,10 +15,11 @@ const HeaderSection: React.FC = () => {
             <div className="w-full flex flex-col lg:flex-row justify-between gap-10 lg:gap-0">
                 <Image
                     src="/indicator.svg"
-                    alt="indicator"
+                    alt=""
                     width={53}
                     height={281}
                     className="hidden lg:block self-end pb-10"
+                    aria-hidden="true"
                 />
 
                 <div className="flex flex-col items-center gap-4">
@@ -36,7 +37,7 @@ const HeaderSection: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col items-center gap-1">
-                        <Image src="/wale.jpg" width={292} height={328} alt="ME" className="w-[220px] sm:w-[280px] lg:w-[292px] h-auto" />
+                        <Image src="/wale.jpg" width={292} height={328} alt="Olawale Onasanya — Web Designer" className="w-[220px] sm:w-[280px] lg:w-[292px] h-auto" />
                         <p>
                             <span className="text-black text-3xl sm:text-5xl font-medium font-helvetica">Olawale </span>
                             <span className="text-black text-3xl sm:text-5xl font-thin font-helvetica">Onasanya</span>
@@ -45,9 +46,9 @@ const HeaderSection: React.FC = () => {
                 </div>
 
                 <div className="w-full lg:w-fit flex flex-row lg:flex-col lg:py-20 justify-center lg:justify-between items-center gap-5 lg:gap-16">
-                    <SocialLink text="Twitter" href="https://twitter.com" external />
-                    <SocialLink text="LinkedIn" href="https://linkedin.com" external />
-                    <SocialLink text="Behance" href="https://behance.net" external />
+                    <SocialLink text="Twitter" href="https://x.com/olawalewebdsgn" external />
+                    <SocialLink text="LinkedIn" href="https://www.linkedin.com/in/olawaleonasanya-webdesigner/" external />
+                    <SocialLink text="Behance" href="https://www.behance.net/Olawale-Onasanya" external />
                 </div>
             </div>
         </header>
