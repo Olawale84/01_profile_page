@@ -536,6 +536,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.addEventListener("mouseleave", () => {
                     worksPreviewContainer.classList.remove("is-active");
                 });
+                
+                // Mobile click logic
+                img.addEventListener("click", () => {
+                    if (window.innerWidth <= 768) {
+                        worksPreviewImg.src = img.src;
+                        worksPreviewContainer.classList.add("mobile-active");
+                        
+                        // Automatically remove after 1.5 seconds
+                        setTimeout(() => {
+                            worksPreviewContainer.classList.remove("mobile-active");
+                        }, 1500);
+                    }
+                });
             });
         }
     }
